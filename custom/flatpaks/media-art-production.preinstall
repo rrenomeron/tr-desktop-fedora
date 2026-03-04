@@ -1,0 +1,15 @@
+# Flatpaks for Media/Art Production
+[Flatpak Preinstall org.gimp.GIMP]
+Branch=stable
+
+[Flatpak Preinstall org.audacityteam.Audacity]
+Branch=stable
+
+[Flatpak Preinstall org.darktable.Darktable]
+Branch=stable
+
+[Flatpak Preinstall org.openshot.OpenShot]
+Branch=stable
+
+[Flatpak Preinstall net.sourceforge.Hugin]
+Branch=stable

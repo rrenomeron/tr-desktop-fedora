@@ -1,0 +1,18 @@
+# Developer Tools
+[Flatpak Preinstall org.sqlitebrowser.sqlitebrowser]
+Branch=stable
+
+[Flatpak Preinstall io.dbeaver.DBeaverCommunity]
+Branch=stable
+
+[Flatpak Preinstall com.ranfdev.DistroShelf]
+Branch=stable
+
+[Flatpak Preinstall me.iepure.devtoolbox]
+Branch=stable
+
+[Flatpak Preinstall io.podman_desktop.PodmanDesktop]
+Branch=stable
+
+[Flatpak Preinstall dev.bragefuglseth.Keypunch]
+Branch=stable

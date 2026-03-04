@@ -1,4 +1,4 @@
-# Copilot Instructions for finpilot
+# Copilot Instructions for silverblue-tr-finpilot
 
 This repository uses comprehensive agent instructions. Please refer to the main documentation file:
 

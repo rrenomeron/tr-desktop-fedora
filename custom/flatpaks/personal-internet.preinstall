@@ -1,0 +1,7 @@
+# Personal Internet Life
+
+[Flatpak Preinstall com.discordapp.Discord]
+Branch=stable
+
+[Flatpak Preinstall com.spotify.Client]
+Branch=stable
