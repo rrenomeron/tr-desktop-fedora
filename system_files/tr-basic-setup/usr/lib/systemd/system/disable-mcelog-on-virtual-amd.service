@@ -1,0 +1,10 @@
+[Unit]
+Description=Disable mcelog service on VMs running on AMD Hypervisors
+Documentation=https://access.redhat.com/solutions/158503
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/check-for-amd-mce-issue.sh
+
+[Install]
+WantedBy=multi-user.target

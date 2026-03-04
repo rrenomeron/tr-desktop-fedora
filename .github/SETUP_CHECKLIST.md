@@ -3,7 +3,7 @@
 ## Initial Setup
 
 ### 1. Rename Template
-- [ ] Update `silverblue-tr-finpilot` to your name in: Containerfile, Justfile, README.md, artifacthub-repo.yml
+- [X] Update `silverblue-tr-finpilot` to your name in: Containerfile, Justfile, README.md, artifacthub-repo.yml
 
 ### 2. Enable GitHub Actions
 - [ ] Settings → Actions → General → Enable workflows
