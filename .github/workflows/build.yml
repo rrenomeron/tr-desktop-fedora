@@ -122,10 +122,10 @@ jobs:
           sudo podman run --rm --privileged \
             -v /var/lib/containers:/var/lib/containers \
             --entrypoint /usr/libexec/bootc-base-imagectl \
-            "localhost/${IMAGE_NAME}:${DEFAULT_TAG}" \
+            "${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}" \
             rechunk --max-layers 96 \
-            "localhost/${IMAGE_NAME}:${DEFAULT_TAG}" \
-            "localhost/${IMAGE_NAME}:${DEFAULT_TAG}"
+            "${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}" \
+            "${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}"
 
       # Tag for registry
       - name: Tag for registry
