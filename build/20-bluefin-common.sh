@@ -22,6 +22,11 @@ cp -r /ctx/oci/common/bluefin/usr/share/ublue-os/just/* /usr/share/ublue-os/just
 cp -r /ctx/oci/common/shared/* /
 shopt -u nullglob
 
+echo "Installing Gnome Extensions from Bluefin"
+/tmp/scripts/run_module.sh 'gnome-extensions' \
+    '{"type":"gnome-extensions","install":["AppIndicator and KStatusNotifierItem Support","Dash to Dock","Blur my Shell","Logo Menu"]}'
+
+
 # This is not technically in the common OCI container (it's in bluefin itself),
 # But we'll include it here for now
 cat > /usr/lib/systemd/system/flatpak-nuke-fedora.service << SERVICE_UNIT

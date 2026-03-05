@@ -6,9 +6,6 @@ set -eou pipefail
 # once we get Bluebuild modules working
 
 dnf5 -y install \
-    gnome-shell-extension-appindicator \
-    gnome-shell-extension-dash-to-dock \
-    gnome-shell-extension-blur-my-shell \
     gnome-tweaks \
     glow \
     gum \

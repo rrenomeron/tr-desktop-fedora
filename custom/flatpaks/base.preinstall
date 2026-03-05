@@ -3,6 +3,7 @@
 # Format: INI file with [Flatpak Preinstall NAME] groups
 # See: https://docs.flatpak.org/en/latest/flatpak-command-reference.html#flatpak-preinstall
 
+
 [Flatpak Preinstall org.gtk.Gtk3theme.adw-gtk3]
 Branch=3.22
 IsRuntime=true
@@ -11,7 +12,7 @@ IsRuntime=true
 Branch=3.22
 IsRuntime=true
 
-[Flatpak preinstall io.github.kolunmi.Bazaar]
+[Flatpak Preinstall io.github.kolunmi.Bazaar]
 Branch=stable
 
 [Flatpak Preinstall org.gnome.Firmware]

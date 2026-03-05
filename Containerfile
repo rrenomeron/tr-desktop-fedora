@@ -80,7 +80,9 @@ FROM ghcr.io/ublue-os/silverblue-main:latest@sha256:f8d5fd28aa7bb0ed9e17e98e4f9f
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
-    --mount=type=tmpfs,dst=/tmp \
+    --mount=type=tmpfs,dst=/tmp \  
+    --mount=type=bind,from=ghcr.io/blue-build/modules:latest,src=/modules,dst=/tmp/modules,rw \
+    --mount=type=bind,from=ghcr.io/blue-build/cli/build-scripts:latest,src=/scripts/,dst=/tmp/scripts/ \
     /ctx/build/build.sh
     
 ### LINTING

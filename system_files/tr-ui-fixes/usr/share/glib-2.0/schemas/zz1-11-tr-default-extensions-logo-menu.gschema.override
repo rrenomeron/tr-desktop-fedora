@@ -1,2 +1,15 @@
 [org.gnome.shell]
 enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com','dash-to-dock@micxgx.gmail.com','blur-my-shell@aunetx','system-monitor-next@paradoxxx.zero.gmail.com','logomenu@aryan_k','accent-directories@taiwbi.com']
+
+[org.gnome.shell.extensions.Logo-menu]
+symbolic-icon=true
+menu-button-icon-image=1
+menu-button-extensions-app='com.mattjakeman.ExtensionManager.desktop'
+menu-button-software-center='flatpak run io.github.kolunmi.Bazaar'
+menu-button-system-monitor='flatpak run io.missioncenter.MissionCenter'
+show-activities-button=true
+show-lockscreen=false
+show-power-option=false
+show-gamemode=false
+hide-forcequit=true
+show-boxbuddy=true
