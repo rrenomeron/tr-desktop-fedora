@@ -118,20 +118,15 @@ jobs:
           labels: ${{ steps.metadata.outputs.labels }}
           oci: false
 
-      - name: Check available images for rechunking
+      - name: Rechunk Image
         run: |
-          sudo podman image ls
-
-
-      # - name: Rechunk Image
-      #   run: |
-      #     sudo podman run --rm --privileged \
-      #       -v /var/lib/containers:/var/lib/containers \
-      #       --entrypoint /usr/libexec/bootc-base-imagectl \
-      #       "${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}" \
-      #       rechunk --max-layers 96 \
-      #       "${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}" \
-      #       "${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}"
+          sudo podman run --rm --privileged \
+            -v /var/lib/containers:/var/lib/containers \
+            --entrypoint /usr/libexec/bootc-base-imagectl \
+            quay.io/fedora/fedora-bootc:43 \
+            rechunk --max-layers 96 \
+            "${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}" \
+            "${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}"
 
       # Tag for registry
       - name: Tag for registry
