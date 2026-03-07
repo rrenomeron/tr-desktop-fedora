@@ -128,11 +128,14 @@ jobs:
       #       "localhost/${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}" \
       #       "${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}"
         run: |
+          echo "Root podman images:"
           sudo podman run --rm --privileged \
             -v /var/lib/containers:/var/lib/containers \
             --entrypoint /usr/sbin/podman \
             quay.io/fedora/fedora-bootc:43 \
             image ls
+          echo "Normal podman images"
+          podman image ls
             
 
       # Tag for registry
