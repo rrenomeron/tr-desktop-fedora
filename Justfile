@@ -99,7 +99,22 @@ build $target_image=image_name $tag=default_tag:
         --pull=newer \
         --tag "${target_image}:${tag}" \
         .
-
+# Command: rechunk
+# Description: Will rechunk the image using bootc-base-imagectl
+#
+# Arguments:
+#   $target_image - The tag you want to apply to the image (default: $image_name).
+#   $tag - The tag for the image (default: $default_tag).
+#
+rechunk $target_image=image_name $tag=default_tag:
+    #!/usr/bin/env bash
+    sudo podman run --rm --privileged \
+        -v /var/lib/containers:/var/lib/containers \
+        --entrypoint=/usr/libexec/bootc-base-imagectl quay.io/fedora/fedora-bootc:43  \
+        rechunk --max-layers 96 \
+        localhost/${target_image}:${tag} \
+        localhost/${target_image}:${tag}
+        
 # Command: _rootful_load_image
 # Description: This script checks if the current user is root or running under sudo. If not, it attempts to resolve the image tag using podman inspect.
 #              If the image is found, it loads it into rootful podman. If the image is not found, it pulls it from the repository.
