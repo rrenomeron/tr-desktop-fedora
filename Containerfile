@@ -46,7 +46,7 @@ COPY --from=ghcr.io/projectbluefin/common:latest@sha256:b9a75b68a14211b363894025
 COPY --from=ghcr.io/ublue-os/brew:latest@sha256:ca91068f51ce663d495ccfc829352d6621ec95f6c7db447ade55023b222f9762 /system_files /oci/brew
 COPY --from=ghcr.io/ublue-os/bluefin-wallpapers-gnome:latest@sha256:4a9b0b771a7e927308cf1240ad1b512b61f2a91954be799bc6e1b5045fea2942 / /oci/bluefin_wallpaper
 # Base Image - GNOME included
-FROM ghcr.io/ublue-os/silverblue-main:latest@sha256:8ccc704de39a87d2f80ae2042eae9eb957f0574fe965253ec7446ae051876892
+FROM ghcr.io/ublue-os/silverblue-main:latest@sha256:5d6809e895d492a7128d0762c15d700afcac58ff53c87de7ba0be4e15ee9e3d9
 
 ARG IMAGE_NAME
 ARG TAG
