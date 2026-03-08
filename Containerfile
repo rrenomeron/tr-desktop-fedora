@@ -48,6 +48,8 @@ COPY --from=ghcr.io/ublue-os/bluefin-wallpapers-gnome:latest@sha256:4a9b0b771a7e
 # Base Image - GNOME included
 FROM ghcr.io/ublue-os/silverblue-main:latest@sha256:8ccc704de39a87d2f80ae2042eae9eb957f0574fe965253ec7446ae051876892
 
+ARG IMAGE_NAME
+ARG TAG
 ## Alternative base images, no desktop included (uncomment to use):
 # FROM ghcr.io/ublue-os/base-main:latest    
 # FROM quay.io/centos-bootc/centos-bootc:stream10
