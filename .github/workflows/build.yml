@@ -128,8 +128,8 @@ jobs:
             --entrypoint /usr/libexec/bootc-base-imagectl \
             quay.io/fedora/fedora-bootc:43 \
             rechunk --max-layers 96 \
-            "${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}" \
-            "${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}"
+            localhost/"${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}" \
+            localhost/"${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}"
         # run: |
         #   echo "Root podman images:"
         #   sudo podman run --rm --privileged \
