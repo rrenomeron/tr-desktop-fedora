@@ -5,15 +5,15 @@ set -eou pipefail
 echo "Building ${IMAGE_NAME}:${TAG}"
 
 OSFORGE_SCRIPTS_TO_USE=(
-    "15-flatpak-substiution-removals"
-    "20-bluefin-parity"
-    "30-tr-pki"
-    "31-tr-ui-fixes"
-    "41-google-chrome"
-    "42-vscode"
-    "43-cockpit"
-    "44-virtualization"
-    "45-docker"
+    "flatpak-substiution-removals"
+    "bluefin-parity"
+    "tr-pki"
+    "tr-ui"
+    "google-chrome"
+    "vscode"
+    "cockpit"
+    "virtualization"
+    "docker"
 )
 
 /ctx/build/custom.sh
