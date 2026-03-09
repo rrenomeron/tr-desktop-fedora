@@ -50,7 +50,7 @@ COPY --from=ghcr.io/ublue-os/brew:latest@sha256:2eca44f5b4b58b8271a625d61c2c063b
 # This will be replace with an OCI container containing these files eventually
 COPY tr-osforge /oci/tr-osforge
 # Base Image - GNOME included
-FROM ghcr.io/ublue-os/silverblue-main:latest@sha256:688f02687212adfe24a5f0c584537b9e1fa3efdd66e1255ae4a1771c029e8a25
+FROM ghcr.io/ublue-os/silverblue-main:latest@sha256:5562596306b071271d0dc5f2fe613f4fdbc9e76c2ddb8406fc2e4d0460dcae48
 
 ARG IMAGE_NAME
 ARG TAG
