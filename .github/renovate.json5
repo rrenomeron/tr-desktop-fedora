@@ -3,7 +3,9 @@
   "extends": [
     "config:best-practices",
   ],
-
+  "git-submodules": {
+      "enabled": true
+    },
   // Do not rebase when the default branch is updated
   "rebaseWhen": "never",
 
