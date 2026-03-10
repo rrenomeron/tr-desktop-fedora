@@ -7,6 +7,42 @@ The reasons to do this are primarily to leverage some neat things from Bluefin/U
 - Building Software Bill of Materials (SBOM)
 - Enabling a testing stream
 
+## About ``silverblue-tr``
+
+This image is [Fedora Silverblue](https://fedoraproject.org/atomic-desktops/silverblue/)) with customizations from Bluefin and Universal Blue and
+own personal preferences baked in to the image.  It's goals are to make provisioning new devices simpler, and to
+keep a consistent baseline of applications between them.
+
+These are the important features of this image:
+
+- Google Chrome RPM installed and set as default browser
+- Clocks set to AM/PM view with Weekday Display
+- Curated selection of Flatpak apps installed automatically
+- Single click to open items in Nautilus
+- Nautilus icons [match accent
+  color](https://extensions.gnome.org/extension/7535/accent-directories/)
+- [System monitor applet](https://github.com/mgalgs/gnome-shell-system-monitor-next-applet) in
+  top panel next to Gnome system menu
+- [DeskChanger](https://github.com/BigE/desk-changer/) wallpaper manager
+- [Weather applet](https://gitlab.gnome.org/somepaulo/weather-or-not)
+- Use smaller icons in Nautilus icon view
+- Sort directories first in Nautilus and GTK file choosers
+- Dark styles enabled by default
+- [System76 wallpaper collection](https://system76.com/merch/desktop-wallpapers)
+- [Framework 12](https://frame.work/laptop12) wallpapers
+- [Intel One Mono](https://www.intel.com/content/www/us/en/company-overview/one-monospace-font.html) set as
+  default monospace font
+- Visual Studio Code RPM installed
+- Libvirt virtualization stack installed
+- Docker CE installed with rootful Docker disabled
+- Dash-to-Dock enabled by default, skipping Overview on login
+- Appindicators enabled by default
+- Logo Menu enabled by default, like Bluefin
+- Windows have minimize and maximize buttons (like Ubuntu and Bluefin)
+- Additional packages (e.g. Firewall GUI, rclone/restic, Universal Blue enhancements)
+- ``ujust`` scripts from Universal Blue images
+- ``<CTRL><ALT>t`` opens a terminal  
+
 ## What's Included
 
 ### Build System
@@ -44,122 +80,10 @@ The reasons to do this are primarily to leverage some neat things from Bluefin/U
 - Helper functions for safe COPR usage
 - See [build/README.md](build/README.md) for details
 
-## Quick Start
 
-### 1. Create Your Repository
+## Production Checklist
 
-Click "Use this template" to create a new repository from this template.
-
-### 2. Rename the Project
-
-Important: Change `silverblue-tr-finpilot` to your repository name in these 6 files:
-
-1. `Containerfile` (line 4): `# Name: your-repo-name`
-2. `Justfile` (line 1): `export image_name := env("IMAGE_NAME", "your-repo-name")`
-3. `README.md` (line 1): `# your-repo-name`
-4. `artifacthub-repo.yml` (line 5): `repositoryID: your-repo-name`
-5. `custom/ujust/README.md` (~line 175): `localhost/your-repo-name:stable`
-6. `.github/workflows/clean.yml` (line 23): `packages: your-repo-name`
-
-### 3. Enable GitHub Actions
-
-- Go to the "Actions" tab in your repository
-- Click "I understand my workflows, go ahead and enable them"
-
-Your first build will start automatically! 
-
-Note: Image signing is disabled by default. Your images will build successfully without any signing keys. Once you're ready for production, see "Optional: Enable Image Signing" below.
-
-### 4. Customize Your Image
-
-Choose your base image in `Containerfile` (line 23):
-```dockerfile
-FROM ghcr.io/ublue-os/bluefin:stable
-```
-
-Add your packages in `build/10-build.sh`:
-```bash
-dnf5 install -y package-name
-```
-
-Customize your apps:
-- Add Brewfiles in `custom/brew/` ([guide](custom/brew/README.md))
-- Add Flatpaks in `custom/flatpaks/` ([guide](custom/flatpaks/README.md))
-- Add ujust commands in `custom/ujust/` ([guide](custom/ujust/README.md))
-
-### 5. Development Workflow
-
-All changes should be made via pull requests:
-
-1. Open a pull request on GitHub with the change you want.
-3. The PR will automatically trigger:
-   - Build validation
-   - Brewfile, Flatpak, Justfile, and shellcheck validation
-   - Test image build
-4. Once checks pass, merge the PR
-5. Merging triggers publishes a `:stable` image
-
-### 6. Deploy Your Image
-
-Switch to your image:
-```bash
-sudo bootc switch ghcr.io/your-username/your-repo-name:stable
-sudo systemctl reboot
-```
-
-## Optional: Enable Image Signing
-
-Image signing is disabled by default to let you start building immediately. However, signing is strongly recommended for production use.
-
-### Why Sign Images?
-
-- Verify image authenticity and integrity
-- Prevent tampering and supply chain attacks
-- Required for some enterprise/security-focused deployments
-- Industry best practice for production images
-
-### Setup Instructions
-
-1. Generate signing keys:
-```bash
-cosign generate-key-pair
-```
-
-This creates two files:
-- `cosign.key` (private key) - Keep this secret
-- `cosign.pub` (public key) - Commit this to your repository
-
-2. Add the private key to GitHub Secrets:
-   - Copy the entire contents of `cosign.key`
-   - Go to your repository on GitHub
-   - Navigate to Settings → Secrets and variables → Actions ([GitHub docs](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository))
-   - Click "New repository secret"
-   - Name: `SIGNING_SECRET`
-   - Value: Paste the entire contents of `cosign.key`
-   - Click "Add secret"
-
-3. Replace the contents of `cosign.pub` with your public key:
-   - Open `cosign.pub` in your repository
-   - Replace the placeholder with your actual public key
-   - Commit and push the change
-
-4. Enable signing in the workflow:
-   - Edit `.github/workflows/build.yml`
-   - Find the "OPTIONAL: Image Signing with Cosign" section.
-   - Uncomment the steps to install Cosign and sign the image (remove the `#` from the beginning of each line in that section).
-   - Commit and push the change
-
-5. Your next build will produce signed images!
-
-Important: Never commit `cosign.key` to the repository. It's already in `.gitignore`.
-
-## Love Your Image? Let's Go to Production
-
-Ready to take your custom OS to production? Enable these features for enhanced security, reliability, and performance:
-
-### Production Checklist
-
-- [ ] **Enable Image Signing** (Recommended)
+- [X] **Enable Image Signing** (Recommended)
   - Provides cryptographic verification of your images
   - Prevents tampering and ensures authenticity
   - See "Optional: Enable Image Signing" section above for setup instructions
@@ -177,7 +101,7 @@ Ready to take your custom OS to production? Enable these features for enhanced s
     5. Commit and push
   - Status: **Disabled by default** (requires signing first)
 
-- [ ] **Enable Image Rechunking** (Recommended)
+- [X] **Enable Image Rechunking** (Recommended)
   - Optimizes bootc image layers for better update performance
   - Reduces update sizes by 5-10x
   - Improves download resumability with evenly sized layers
@@ -187,7 +111,7 @@ Ready to take your custom OS to production? Enable these features for enhanced s
     3. Add a rechunk step after the build (see example below)
   - Status: **Not enabled by default** (optional optimization)
 
-#### Adding Image Rechunking
+### Adding Image Rechunking
 
 After building your bootc image, add a rechunk step before pushing to the registry. Here's an example based on the workflow used by [zirconium-dev/zirconium](https://github.com/zirconium-dev/zirconium):
 
@@ -258,77 +182,3 @@ cosign verify --key cosign.pub ghcr.io/your-username/your-repo-name:stable
 - [ujust Commands](custom/ujust/README.md) - User convenience commands
 - [Build Scripts](build/README.md) - Build-time customization
 
-## Architecture
-
-This template follows the **multi-stage build architecture** from @projectbluefin/distroless, as documented in the [Bluefin Contributing Guide](https://docs.projectbluefin.io/contributing/).
-
-### Multi-Stage Build Pattern
-
-**Stage 1: Context (ctx)** - Combines resources from multiple sources:
-- Local build scripts (`/build`)
-- Local custom files (`/custom`)
-- **@projectbluefin/common** - Desktop configuration shared with Aurora
-- **@projectbluefin/branding** - Branding assets
-- **@ublue-os/artwork** - Artwork shared with Aurora and Bazzite
-- **@ublue-os/brew** - Homebrew integration
-
-**Stage 2: Base Image** - Default options:
-- `ghcr.io/ublue-os/silverblue-main:latest` (Fedora-based, default)
-- `quay.io/centos-bootc/centos-bootc:stream10` (CentOS-based alternative)
-
-### Benefits of This Architecture
-
-- **Modularity**: Compose your image from reusable OCI containers
-- **Maintainability**: Update shared components independently
-- **Reproducibility**: Renovate automatically updates OCI tags to SHA digests
-- **Consistency**: Share components across Bluefin, Aurora, and custom images
-
-### OCI Container Resources
-
-The template imports files from these OCI containers at build time:
-
-```dockerfile
-COPY --from=ghcr.io/ublue-os/base-main:latest /system_files /oci/base
-COPY --from=ghcr.io/projectbluefin/common:latest /system_files /oci/common
-COPY --from=ghcr.io/ublue-os/brew:latest /system_files /oci/brew
-```
-
-Your build scripts can access these files at:
-- `/ctx/oci/base/` - Base system configuration
-- `/ctx/oci/common/` - Shared desktop configuration
-- `/ctx/oci/branding/` - Branding assets
-- `/ctx/oci/artwork/` - Artwork files
-- `/ctx/oci/brew/` - Homebrew integration files
-
-**Note**: Renovate automatically updates `:latest` tags to SHA digests for reproducible builds.
-
-## Local Testing
-
-Test your changes before pushing:
-
-```bash
-just build              # Build container image
-just build-qcow2        # Build VM disk image
-just run-vm-qcow2       # Test in browser-based VM
-```
-
-## Community
-
-- [Universal Blue Discord](https://discord.gg/WEu6BdFEtp)
-- [bootc Discussion](https://github.com/bootc-dev/bootc/discussions)
-
-## Learn More
-
-- [Universal Blue Documentation](https://universal-blue.org/)
-- [bootc Documentation](https://containers.github.io/bootc/)
-- [Video Tutorial by TesterTech](https://www.youtube.com/watch?v=IxBl11Zmq5wE)
-
-## Security
-
-This template provides security features for production use:
-- Optional SBOM generation (Software Bill of Materials) for supply chain transparency
-- Optional image signing with cosign for cryptographic verification
-- Automated security updates via Renovate
-- Build provenance tracking
-
-These security features are disabled by default to allow immediate testing. When you're ready for production, see the "Love Your Image? Let's Go to Production" section above to enable them.
