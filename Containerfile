@@ -48,7 +48,7 @@ COPY --from=ghcr.io/ublue-os/brew:latest@sha256:2eca44f5b4b58b8271a625d61c2c063b
 # Copy from submodule.  We put it under /oci for convenience
 COPY tr-osforge/reusable_scripting /oci/tr-osforge
 # Base Image - GNOME included
-FROM ghcr.io/ublue-os/silverblue-main:latest@sha256:5562596306b071271d0dc5f2fe613f4fdbc9e76c2ddb8406fc2e4d0460dcae48
+FROM ghcr.io/ublue-os/silverblue-main:latest@sha256:bede95a23854fc939f2f3642454bcb8a9b93fb26aa0a076dc958830c63f17f6e
 
 ARG IMAGE_NAME
 ARG TAG
