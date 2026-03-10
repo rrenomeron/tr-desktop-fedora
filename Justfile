@@ -109,6 +109,9 @@ build $target_image=image_name $tag=default_tag:
 #
 rechunk $target_image=image_name $tag=default_tag:
     #!/usr/bin/env bash
+    podman save -o image.tar localhost/${target_image}:${tag}
+    sudo podman load < image.tar
+    rm image.tar
     sudo podman run --rm --privileged \
         -v /var/lib/containers:/var/lib/containers \
         --entrypoint=/usr/libexec/bootc-base-imagectl quay.io/fedora/fedora-bootc:43  \
