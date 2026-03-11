@@ -7,6 +7,7 @@ echo "Building ${IMAGE_NAME}:${TAG}"
 # Add the features from tr-osforge that you want to incude in your image.
 # The scripts can be found in reusable_scripts/build; include the name without the ".sh"
 # suffix, e.g. putting "google-chrome" in this array will run "google-chrome.sh" in your build.
+# The scripts are run in order.
 OSFORGE_SCRIPTS_TO_USE=(
     "flatpak-substiution-removals"
     "bluefin-parity"

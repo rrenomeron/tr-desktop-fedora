@@ -44,9 +44,10 @@ COPY system_files /system_files
 # Note: Renovate can automatically update these :latest tags to SHA-256 digests for reproducibility
 COPY --from=ghcr.io/projectbluefin/common:latest@sha256:69e0d5c9ec9fe3766dc82453d96b098874ca3469a8d7b1a272677eb75e9c24e4 /system_files /oci/common
 COPY --from=ghcr.io/ublue-os/brew:latest@sha256:2eca44f5b4b58b8271a625d61c2c063b7c8776f68d004ae67563e2a79450be9c /system_files /oci/brew
-
+COPY --from=ghcr.io/ublue-os/akmods:coreos-stable-43 / /oci/akmods
 # Copy from submodule.  We put it under /oci for convenience
 COPY tr-osforge/reusable_scripting /oci/tr-osforge
+
 # Base Image - GNOME included
 FROM ghcr.io/ublue-os/silverblue-main:latest@sha256:bede95a23854fc939f2f3642454bcb8a9b93fb26aa0a076dc958830c63f17f6e
 
@@ -70,6 +71,13 @@ ARG TAG
 
 # RUN rm /opt && mkdir /opt
 
+# Need to do this in a separate RUN instruction because
+# Kernel installation needs /tmp to be on the image,
+# Not a bind mount elsewhere
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    --mount=type=cache,dst=/var/cache \
+    --mount=type=cache,dst=/var/log \
+/ctx/oci/tr-osforge/build/akmods-kernel.sh
 ### MODIFICATIONS
 ## Make modifications desired in your image and install packages by modifying the build scripts.
 ## The following RUN directive mounts the ctx stage which includes:
