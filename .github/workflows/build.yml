@@ -127,7 +127,7 @@ jobs:
       - name: Rechunk Image
         run: |
           echo "Saving image to rootful storage ..."
-          podman save localhost/"${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}" > image.tar
+          podman save -o image.tar localhost/"${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}"
           sudo podman image load < image.tar
           echo "... done."
           sudo podman run --rm --privileged \
