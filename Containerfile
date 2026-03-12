@@ -49,7 +49,7 @@ COPY --from=ghcr.io/ublue-os/akmods:coreos-stable-43 / /oci/akmods
 COPY tr-osforge/reusable_scripting /oci/tr-osforge
 
 # Base Image - GNOME included
-FROM ghcr.io/ublue-os/silverblue-main:latest@sha256:bede95a23854fc939f2f3642454bcb8a9b93fb26aa0a076dc958830c63f17f6e
+FROM ghcr.io/ublue-os/silverblue-main:latest@sha256:eab06212a5270d19194401b5ca447aba9289a1834dc8bc52291b903eda53fe92
 
 ARG IMAGE_NAME
 ARG TAG
