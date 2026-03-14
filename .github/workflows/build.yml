@@ -48,7 +48,7 @@ jobs:
           if [ "$BRANCH" == "main" ]; then
             DEFAULT_TAG="testing"
           else
-            DEFAULT_TAG=$BRANCH
+            DEFAULT_TAG=${BRANCH//\//-}
           fi
           echo "DEFAULT_TAG=$DEFAULT_TAG" >> ${GITHUB_ENV}
           echo "Head ref: $GITHUB_HEAD_REF"
