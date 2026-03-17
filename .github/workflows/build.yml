@@ -180,7 +180,7 @@ jobs:
             -v /var/lib/containers:/var/lib/containers \
             --entrypoint /usr/libexec/bootc-base-imagectl \
             quay.io/fedora/fedora-bootc:43 \
-            rechunk --max-layers 96 \
+            rechunk --max-layers 67 \
             localhost/"${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}" \
             localhost/"${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}"
       # These `if` statements are so that pull requests for your custom images do not make it publish any packages under your name without you knowing
