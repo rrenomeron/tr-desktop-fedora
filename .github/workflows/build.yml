@@ -143,6 +143,19 @@ jobs:
             IMAGE_NAME=${{ env.IMAGE_NAME }}
             TAG=${{ env.DEFAULT_TAG }}
 
+      - name: Rechunk Image
+        run: |
+          echo "Saving image to rootful storage ..."
+          podman save -o image.tar localhost/"${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}"
+          sudo podman image load < image.tar
+          echo "... done."
+          sudo podman run --rm --privileged \
+            -v /var/lib/containers:/var/lib/containers \
+            --entrypoint /usr/libexec/bootc-base-imagectl \
+            quay.io/fedora/fedora-bootc:43 \
+            rechunk --max-layers 128 \
+            localhost/"${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}" \
+            localhost/"${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}"
       # Tag for registry
       - name: Tag for registry
         run: |
@@ -176,19 +189,6 @@ jobs:
       #     $SYFT_CMD localhost/${IMAGE}:${DEFAULT_TAG} -o spdx-json=${OUTPUT_PATH}
       #     echo "OUTPUT_PATH=${OUTPUT_PATH}" >> $GITHUB_OUTPUT
 
-      - name: Rechunk Image
-        run: |
-          echo "Saving image to rootful storage ..."
-          podman save -o image.tar localhost/"${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}"
-          sudo podman image load < image.tar
-          echo "... done."
-          sudo podman run --rm --privileged \
-            -v /var/lib/containers:/var/lib/containers \
-            --entrypoint /usr/libexec/bootc-base-imagectl \
-            quay.io/fedora/fedora-bootc:43 \
-            rechunk --max-layers 128 \
-            localhost/"${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}" \
-            localhost/"${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}"
       # These `if` statements are so that pull requests for your custom images do not make it publish any packages under your name without you knowing
       # They also check if the runner is on the default branch so that things like the merge queue (if you enable it), are going to work
       - name: Login to GitHub Container Registry
