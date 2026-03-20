@@ -144,14 +144,14 @@ jobs:
       #       TAG=${{ env.DEFAULT_TAG }}
       - name: Build Image
         run: \
-          sudo just build ${{ env.IMAGE_NAME }} ${{ env.IMAGE_TAG }}
+          just build ${{ env.IMAGE_NAME }} ${{ env.DEFAULT_TAG }}
 
       - name: Rechunk Image
         run: |
-          #echo "Saving image to rootful storage ..."
-          #podman save -o image.tar localhost/"${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}"
-          #sudo podman image load < image.tar
-          #echo "... done."
+          echo "Saving image to rootful storage ..."
+          podman save -o image.tar localhost/"${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}"
+          sudo podman image load < image.tar
+          echo "... done."
           sudo podman run --rm --privileged \
             -v /var/lib/containers:/var/lib/containers \
             --entrypoint /usr/libexec/bootc-base-imagectl \
