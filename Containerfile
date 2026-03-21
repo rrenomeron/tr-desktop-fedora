@@ -89,93 +89,93 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
 #
 # Revisit this when we find a better solution to rechunking
 
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    --mount=type=cache,dst=/var/cache \
+    --mount=type=cache,dst=/var/log \
+    --mount=type=tmpfs,dst=/tmp \  
+    --mount=type=bind,from=ghcr.io/blue-build/modules:latest,src=/modules,dst=/tmp/modules,rw \
+    --mount=type=bind,from=ghcr.io/blue-build/cli/build-scripts:latest,src=/scripts/,dst=/tmp/scripts/ \
+    /ctx/build/build.sh
+
+# RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+#     --mount=type=cache,dst=/var/cache \
+#     --mount=type=cache,dst=/var/log \
+#     --mount=type=tmpfs,dst=/tmp \
+#     /ctx/oci/tr-osforge/build/flatpak-substiution-removals.sh
+
 # RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
 #     --mount=type=cache,dst=/var/cache \
 #     --mount=type=cache,dst=/var/log \
 #     --mount=type=tmpfs,dst=/tmp \  
 #     --mount=type=bind,from=ghcr.io/blue-build/modules:latest,src=/modules,dst=/tmp/modules,rw \
 #     --mount=type=bind,from=ghcr.io/blue-build/cli/build-scripts:latest,src=/scripts/,dst=/tmp/scripts/ \
-#     /ctx/build/build.sh
+#     /ctx/oci/tr-osforge/build/bluefin-parity.sh
 
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=cache,dst=/var/cache \
-    --mount=type=cache,dst=/var/log \
-    --mount=type=tmpfs,dst=/tmp \
-    /ctx/oci/tr-osforge/build/flatpak-substiution-removals.sh
+# RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+#     --mount=type=cache,dst=/var/cache \
+#     --mount=type=cache,dst=/var/log \
+#     --mount=type=tmpfs,dst=/tmp \
+#     /ctx/oci/tr-osforge/build/tr-pki.sh
 
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=cache,dst=/var/cache \
-    --mount=type=cache,dst=/var/log \
-    --mount=type=tmpfs,dst=/tmp \  
-    --mount=type=bind,from=ghcr.io/blue-build/modules:latest,src=/modules,dst=/tmp/modules,rw \
-    --mount=type=bind,from=ghcr.io/blue-build/cli/build-scripts:latest,src=/scripts/,dst=/tmp/scripts/ \
-    /ctx/oci/tr-osforge/build/bluefin-parity.sh
-
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=cache,dst=/var/cache \
-    --mount=type=cache,dst=/var/log \
-    --mount=type=tmpfs,dst=/tmp \
-    /ctx/oci/tr-osforge/build/tr-pki.sh
-
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=cache,dst=/var/cache \
-    --mount=type=cache,dst=/var/log \
-    --mount=type=tmpfs,dst=/tmp \  
-    --mount=type=bind,from=ghcr.io/blue-build/modules:latest,src=/modules,dst=/tmp/modules,rw \
-    --mount=type=bind,from=ghcr.io/blue-build/cli/build-scripts:latest,src=/scripts/,dst=/tmp/scripts/ \
-    /ctx/oci/tr-osforge/build/tr-ui.sh
+# RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+#     --mount=type=cache,dst=/var/cache \
+#     --mount=type=cache,dst=/var/log \
+#     --mount=type=tmpfs,dst=/tmp \  
+#     --mount=type=bind,from=ghcr.io/blue-build/modules:latest,src=/modules,dst=/tmp/modules,rw \
+#     --mount=type=bind,from=ghcr.io/blue-build/cli/build-scripts:latest,src=/scripts/,dst=/tmp/scripts/ \
+#     /ctx/oci/tr-osforge/build/tr-ui.sh
 
 
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=cache,dst=/var/cache \
-    --mount=type=cache,dst=/var/log \
-    --mount=type=tmpfs,dst=/tmp \
-    /ctx/oci/tr-osforge/build/brew.sh 
+# RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+#     --mount=type=cache,dst=/var/cache \
+#     --mount=type=cache,dst=/var/log \
+#     --mount=type=tmpfs,dst=/tmp \
+#     /ctx/oci/tr-osforge/build/brew.sh 
 
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=cache,dst=/var/cache \
-    --mount=type=cache,dst=/var/log \
-    --mount=type=tmpfs,dst=/tmp \
-    /ctx/oci/tr-osforge/build/google-chrome.sh 
+# RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+#     --mount=type=cache,dst=/var/cache \
+#     --mount=type=cache,dst=/var/log \
+#     --mount=type=tmpfs,dst=/tmp \
+#     /ctx/oci/tr-osforge/build/google-chrome.sh 
 
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=cache,dst=/var/cache \
-    --mount=type=cache,dst=/var/log \
-    --mount=type=tmpfs,dst=/tmp \
-    /ctx/oci/tr-osforge/build/vscode.sh 
+# RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+#     --mount=type=cache,dst=/var/cache \
+#     --mount=type=cache,dst=/var/log \
+#     --mount=type=tmpfs,dst=/tmp \
+#     /ctx/oci/tr-osforge/build/vscode.sh 
     
 
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=cache,dst=/var/cache \
-    --mount=type=cache,dst=/var/log \
-    --mount=type=tmpfs,dst=/tmp \
-    /ctx/oci/tr-osforge/build/cockpit.sh
+# RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+#     --mount=type=cache,dst=/var/cache \
+#     --mount=type=cache,dst=/var/log \
+#     --mount=type=tmpfs,dst=/tmp \
+#     /ctx/oci/tr-osforge/build/cockpit.sh
 
 
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=cache,dst=/var/cache \
-    --mount=type=cache,dst=/var/log \
-    --mount=type=tmpfs,dst=/tmp \
-    /ctx/oci/tr-osforge/build/virtualization.sh 
+# RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+#     --mount=type=cache,dst=/var/cache \
+#     --mount=type=cache,dst=/var/log \
+#     --mount=type=tmpfs,dst=/tmp \
+#     /ctx/oci/tr-osforge/build/virtualization.sh 
 
 
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=cache,dst=/var/cache \
-    --mount=type=cache,dst=/var/log \
-    --mount=type=tmpfs,dst=/tmp \
-    /ctx/oci/tr-osforge/build/docker.sh
+# RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+#     --mount=type=cache,dst=/var/cache \
+#     --mount=type=cache,dst=/var/log \
+#     --mount=type=tmpfs,dst=/tmp \
+#     /ctx/oci/tr-osforge/build/docker.sh
 
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=cache,dst=/var/cache \
-    --mount=type=cache,dst=/var/log \
-    --mount=type=tmpfs,dst=/tmp \
-    /ctx/build/image-overrides.sh
+# RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+#     --mount=type=cache,dst=/var/cache \
+#     --mount=type=cache,dst=/var/log \
+#     --mount=type=tmpfs,dst=/tmp \
+#     /ctx/build/image-overrides.sh
 
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=cache,dst=/var/cache \
-    --mount=type=cache,dst=/var/log \
-    --mount=type=tmpfs,dst=/tmp \
-    /ctx/build/custom.sh    
+# RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+#     --mount=type=cache,dst=/var/cache \
+#     --mount=type=cache,dst=/var/log \
+#     --mount=type=tmpfs,dst=/tmp \
+#     /ctx/build/custom.sh    
     
 ### LINTING
 ## Verify final image and contents are correct.
