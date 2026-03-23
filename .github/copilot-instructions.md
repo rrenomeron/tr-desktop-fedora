@@ -1,4 +1,4 @@
-# Copilot Instructions for silverblue-tr-finpilot
+# Copilot Instructions for tr-desktop-fedora
 
 This repository uses comprehensive agent instructions. Please refer to the main documentation file:
 

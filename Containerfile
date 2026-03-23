@@ -1,9 +1,9 @@
 ###############################################################################
 # PROJECT NAME CONFIGURATION
 ###############################################################################
-# Name: silverblue-tr-finpilot
+# Name: tr-desktop-fedora
 #
-# IMPORTANT: Change "silverblue-tr-finpilot" above to your desired project name.
+# IMPORTANT: Change "tr-desktop-fedora" above to your desired project name.
 # This name should be used consistently throughout the repository in:
 #   - Justfile: export image_name := env("IMAGE_NAME", "your-name-here")
 #   - README.md: # your-name-here (title)

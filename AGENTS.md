@@ -1,4 +1,4 @@
-# Copilot Instructions for silverblue-tr-finpilot bootc Image Template
+# Copilot Instructions for tr-desktop-fedora bootc Image Template
 
 ## CRITICAL: GitHub API Usage
 
@@ -31,9 +31,9 @@
 
 **When this repository is used as a template, you MUST:**
 
-### 1. Rename ALL instances of `silverblue-tr-finpilot`
+### 1. Rename ALL instances of `tr-desktop-fedora`
 
-**Source of truth**: `Containerfile` line 9: `# Name: silverblue-tr-finpilot`
+**Source of truth**: `Containerfile` line 9: `# Name: tr-desktop-fedora`
 
 **Files to update:**
 - `Containerfile` (line 9)
@@ -1104,5 +1104,5 @@ Assisted-by: Claude 3.5 Sonnet via GitHub Copilot
 ---
 
 **Last Updated**: 2025-11-14  
-**Template Version**: silverblue-tr-finpilot (Enhanced with comprehensive Copilot instructions)  
+**Template Version**: tr-desktop-fedora (Enhanced with comprehensive Copilot instructions)  
 **Maintainer**: Universal Blue Community
