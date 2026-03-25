@@ -145,7 +145,9 @@ clean-containers:
 
 ## Important: Package Installation
 
-**Do not install packages via dnf5/rpm in ujust commands.** Bootc images are immutable and package installation should happen at build time in [`build/10-build.sh`](../../build/10-build.sh).
+**Do not install packages via dnf5/rpm in ujust commands.** Bootc images are immutable and
+package installation should happen at build time in [`build/build.sh`](../../build/build.sh) or
+one of the scripts it calls.
 
 For runtime package installation, use:
 - **Brewfiles** - Create shortcuts to Brewfiles in [`custom/brew/`](../brew/)

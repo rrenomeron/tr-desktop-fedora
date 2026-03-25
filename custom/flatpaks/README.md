@@ -1,6 +1,8 @@
 # Flatpak Preinstall Integration
 
-This directory contains Flatpak preinstall configuration files that will be copied into your custom image at `/etc/flatpak/preinstall.d/`.
+This directory contains Flatpak preinstall configuration files that will be copied into your
+custom image at `/etc/flatpak/preinstall.d/`.  In addition, there are files in
+``tr-osforge/reusable-scripting/custom/flatpaks`` that will also be copied to your image.
 
 ## What is Flatpak Preinstall?
 
@@ -49,13 +51,18 @@ See: https://docs.flatpak.org/en/latest/flatpak-command-reference.html#flatpak-p
 
 ### Adding Flatpaks to Your Image
 
-1. Edit [`default.preinstall`](default.preinstall) or create new `.preinstall` files in this directory
+1. Edit one of the preinstall files:
+  - [`local.preinstall`](local.preinstall) for flatpaks that are only expected to be used with
+    this image
+  - One of the files in ``tr-osforge/reusable-scripting/custom/flatpaks`` for flatpaks that
+    should be installed in all desktop images
 2. Add Flatpak references in INI format with `[Flatpak Preinstall NAME]` sections
 3. Build your image - the files will be copied to `/etc/flatpak/preinstall.d/`
-4. After user setup completes, Flatpaks will be automatically installed
+4. After user setup completes, Flatpaks will be automatically installed.  For existing users,
+   the flatpaks will be installed on the next boot
 
 **Example Files in this directory:**
-- [`default.preinstall`](default.preinstall) - Core applications from Bluefin
+- [`local.preinstall`](local.preinstall) - Core applications from Bluefin
 
 ### Finding Flatpak IDs
 
@@ -69,7 +76,7 @@ Or browse Flathub: https://flathub.org/
 ## Customization
 
 Edit the existing file or create new ones:
-- **[`default.preinstall`](default.preinstall)** - Modify the default application list
+- **[`local.preinstall`](local.preinstall)** - Modify the default application list
 - **Create new files:**
   - `development.preinstall` - Development tools
   - `gaming.preinstall` - Gaming applications

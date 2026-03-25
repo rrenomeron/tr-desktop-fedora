@@ -79,6 +79,20 @@ and corresponding branch to facilitate testing of the new release.
 
 ## Development and Maintenance Process
 
+### Getting Started
+
+Initialize the submodule and prepare it for editing:
+```
+cd tr-osforge
+git submodule init
+git submodule update --remote
+git checkout main
+```
+
+### Working with the Build Scripts
+
+See [build/README.md](build/README.md)
+
 ### Local Development and Testing
 
 To test changes locally, do the following:
