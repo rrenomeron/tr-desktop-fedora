@@ -5,7 +5,6 @@
   ],
   "git-submodules": {
       "enabled": true
-      "automerge" true
     },
   // Do not rebase when the default branch is updated
   "rebaseWhen": "never",
