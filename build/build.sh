@@ -10,6 +10,7 @@ echo "Building ${IMAGE_NAME}:${TAG}"
 # The scripts are run in order.
 OSFORGE_SCRIPTS_TO_USE=(
     "flatpak-substiution-removals"
+    "multimedia-support"
     "bluefin-parity"
     "tr-pki"
     "tr-ui"
