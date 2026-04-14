@@ -83,9 +83,7 @@ and corresponding branch to facilitate testing of the new release.
 
 Initialize the submodule and prepare it for editing:
 ```
-cd tr-osforge
-git submodule init
-git submodule update --remote
+just setup-submodule
 git checkout main
 ```
 
