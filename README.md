@@ -40,7 +40,8 @@ These are the important features of this image:
 - "Gated" Kernel from the [Fedora CoreOS stable stream](https://www.fedoraproject.org/coreos/release-notes)
 - Google Chrome RPM installed and set as default browser
 - Clocks set to AM/PM view with Weekday Display
-- Curated selection of Flatpak apps installed automatically
+- [Bazaar](https://flathub.org/en/apps/io.github.kolunmi.Bazaar) app store replaces GNOME Software
+- Curated selection of Flatpak apps installed automatically, from [Flathub](https://flathub.org) instead of Fedora
 - Single click to open items in Nautilus
 - Nautilus icons [match accent
   color](https://extensions.gnome.org/extension/7535/accent-directories/)
