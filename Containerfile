@@ -56,7 +56,7 @@ COPY tr-osforge/reusable_scripting /oci/tr-osforge
 # the ublue main image will produce beta images before the actual release.
 # 
 # The convention for ublue-main is "latest" for current Fedora, and "gts" for Fedora-1
-FROM ghcr.io/ublue-os/silverblue-main:latest@sha256:7ddd2ee303652986c455242343748b041abcd33f37a73a478aea839c0be8e6e5
+FROM ghcr.io/ublue-os/silverblue-main:latest@sha256:00d510b824002eba5b673ffebe0ba40d408d38653f60eca0843dc04ed2ca67ac
 
 ARG IMAGE_NAME
 ARG TAG
