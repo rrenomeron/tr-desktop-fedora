@@ -65,10 +65,10 @@ ARG TAG
 # Need to do this in a separate RUN instruction because
 # Kernel installation needs /tmp to be on the image,
 # Not a bind mount elsewhere
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=cache,dst=/var/cache \
-    --mount=type=cache,dst=/var/log \
-/ctx/oci/tr-osforge/build/akmods-kernel.sh
+# RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+#     --mount=type=cache,dst=/var/cache \
+#     --mount=type=cache,dst=/var/log \
+# /ctx/oci/tr-osforge/build/akmods-kernel.sh
 
 ### OTHER MODIFICATIONS
 # 
