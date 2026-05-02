@@ -47,7 +47,7 @@ COPY system_files /system_files
 # Note: Renovate can automatically update these :latest tags to SHA-256 digests for reproducibility
 COPY --from=ghcr.io/projectbluefin/common:latest@sha256:6db2b568513789868023ecc80b4b87e5a354f6c83206bdca57db9c6647d48fe4 /system_files /oci/common
 COPY --from=ghcr.io/ublue-os/brew:latest@sha256:20d951fe7826ecc099b924a127eab4949f0a8566b15bf76a22bdb95a49468919 /system_files /oci/brew
-COPY --from=ghcr.io/ublue-os/akmods:coreos-stable-43@sha256:408aa904628ae51d3a135e7cf40bdfebceaee03219cae51043e1018ce5cb03c4 / /oci/akmods
+COPY --from=ghcr.io/ublue-os/akmods:coreos-stable-43@sha256:b1e1a307323aec7ecb501dc50a8fb59ed16831618a0beb0f4e7ed43e10700f6b / /oci/akmods
 # Copy from submodule.  We put it under /oci for convenience
 COPY tr-osforge/reusable_scripting /oci/tr-osforge
 
@@ -85,4 +85,6 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     
 ### LINTING
 ## Verify final image and contents are correct.
-RUN bootc container lint
+## NOTE: the --skip var-tmpfiles is due to a weird problem involving an unexpected error
+##  See https://github.com/rrenomeron/tr-desktop-fedora/actions/runs/25212412017/job/73925606106
+RUN bootc container lint 
