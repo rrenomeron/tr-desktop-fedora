@@ -47,7 +47,7 @@ COPY system_files /system_files
 # Note: Renovate can automatically update these :latest tags to SHA-256 digests for reproducibility
 COPY --from=ghcr.io/projectbluefin/common:latest@sha256:c1fcbdf3ccf0aaba71f8aaf2b2a5bd0bc507e6d33c8433bdf29584cd705a41cb /system_files /oci/common
 COPY --from=ghcr.io/ublue-os/brew:latest@sha256:20d951fe7826ecc099b924a127eab4949f0a8566b15bf76a22bdb95a49468919 /system_files /oci/brew
-COPY --from=ghcr.io/ublue-os/akmods:main-43 / /oci/akmods
+COPY --from=ghcr.io/ublue-os/akmods:main-43@sha256:2eeecfe2807b7eafc2f30ebf60a12239573051b715b3030d4feabd575e5629df / /oci/akmods
 # Copy from submodule.  We put it under /oci for convenience
 COPY tr-osforge/reusable_scripting /oci/tr-osforge
 
