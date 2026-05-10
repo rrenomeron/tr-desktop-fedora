@@ -47,7 +47,7 @@ COPY system_files /system_files
 # Note: Renovate can automatically update these :latest tags to SHA-256 digests for reproducibility
 COPY --from=ghcr.io/projectbluefin/common:latest /system_files /oci/common
 COPY --from=ghcr.io/ublue-os/brew:latest /system_files /oci/brew
-COPY --from=ghcr.io/ublue-os/akmods:coreos-stable-43 / /oci/akmods
+COPY --from=ghcr.io/ublue-os/akmods:coreos-testing-44 / /oci/akmods
 # Copy from submodule.  We put it under /oci for convenience
 COPY tr-osforge/reusable_scripting /oci/tr-osforge
 
@@ -65,10 +65,10 @@ ARG TAG
 # Need to do this in a separate RUN instruction because
 # Kernel installation needs /tmp to be on the image,
 # Not a bind mount elsewhere
-# RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-#     --mount=type=cache,dst=/var/cache \
-#     --mount=type=cache,dst=/var/log \
-# /ctx/oci/tr-osforge/build/akmods-kernel.sh
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    --mount=type=cache,dst=/var/cache \
+    --mount=type=cache,dst=/var/log \
+/ctx/oci/tr-osforge/build/akmods-kernel.sh
 
 ### OTHER MODIFICATIONS
 # 
