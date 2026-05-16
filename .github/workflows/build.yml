@@ -10,6 +10,7 @@ on:
     branches:
       - main
       - production
+      - beta-44
     paths-ignore:
       - '**/README.md'
   workflow_dispatch:
@@ -202,24 +203,11 @@ jobs:
       #     $SYFT_CMD localhost/${IMAGE}:${DEFAULT_TAG} -o spdx-json=${OUTPUT_PATH}
       #     echo "OUTPUT_PATH=${OUTPUT_PATH}" >> $GITHUB_OUTPUT
 
-      - name: Rechunk Image
-        run: |
-          echo "Saving image to rootful storage ..."
-          podman save -o image.tar localhost/"${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}"
-          sudo podman image load < image.tar
-          echo "... done."
-          sudo podman run --rm --privileged \
-            -v /var/lib/containers:/var/lib/containers \
-            --entrypoint /usr/libexec/bootc-base-imagectl \
-            quay.io/fedora/fedora-bootc:43 \
-            rechunk --max-layers 96 \
-            localhost/"${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}" \
-            localhost/"${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}"
       # These `if` statements are so that pull requests for your custom images do not make it publish any packages under your name without you knowing
       # They also check if the runner is on the default branch so that things like the merge queue (if you enable it), are going to work
       - name: Login to GitHub Container Registry
         uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
-        if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/production')
+        if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/production' || github.ref == 'refs/heads/beta-44')
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -227,7 +215,7 @@ jobs:
 
       - name: Push To GHCR
         uses: redhat-actions/push-to-registry@5ed88d269cf581ea9ef6dd6806d01562096bee9c # v2
-        if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/production')
+        if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/production' || github.ref == 'refs/heads/beta-44')
         id: push
         env:
           REGISTRY_USER: ${{ github.actor }}
@@ -244,10 +232,10 @@ jobs:
 
       - name: Install Cosign
         uses: sigstore/cosign-installer@d7543c93d881b35a8faa02e8e3605f69b7a1ce62 # v3.10.0
-        if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/production')
+        if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/production' || github.ref == 'refs/heads/beta-44')
       
       - name: Sign container image
-        if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/production')
+        if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/production' || github.ref == 'refs/heads/beta-44')
         run: |
           IMAGE_FULL="${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}"
           for tag in ${{ steps.metadata.outputs.tags }}; do
