@@ -6,7 +6,7 @@ on:
   push:
     branches:
       - main
-      - script-external-refactor
+      - beta-44
     paths:
       - '.github/renovate.json5'
       - '.github/workflows/renovate.yml'
