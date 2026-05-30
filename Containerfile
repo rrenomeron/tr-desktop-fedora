@@ -45,7 +45,7 @@ COPY custom /custom
 COPY system_files /system_files
 # Copy from OCI containers to distinct subdirectories to avoid conflicts
 # Note: Renovate can automatically update these :latest tags to SHA-256 digests for reproducibility
-COPY --from=ghcr.io/projectbluefin/common:latest@sha256:1e7f8c88b8efb67b3fc42ef29bf0d927e9b8366c26dcf71893169979b29a4418 /system_files /oci/common
+COPY --from=ghcr.io/projectbluefin/common:latest@sha256:862f91a4c5b199f1a915311807a35a9d673947557976eafa32d6904f6c36abcf /system_files /oci/common
 COPY --from=ghcr.io/ublue-os/brew:latest@sha256:837fd51428e23fbe68b9d35651b0b4158b18c68045f54f00d2410b5c8ad4d363 /system_files /oci/brew
 COPY --from=ghcr.io/ublue-os/akmods:coreos-testing-43-x86_64@sha256:8afd998f9556c87eae391c0985e4e59ff781c21fee0159e4dda91ee60fed2736 / /oci/akmods
 # Copy from submodule.  We put it under /oci for convenience
@@ -56,7 +56,7 @@ COPY tr-osforge/reusable_scripting /oci/tr-osforge
 # the ublue main image will produce beta images before the actual release.
 # 
 # The convention for ublue-main is "latest" for current Fedora, and "gts" for Fedora-1
-FROM ghcr.io/ublue-os/silverblue-main:gts@sha256:9ba9107ff4451e6b7845186a73fdcf5f4d1b2389a2d94d0bd461b484ea9a9bf6
+FROM ghcr.io/ublue-os/silverblue-main:gts@sha256:dcfe9b7ee23eb9493c1faa8e706462bcfee496f825cdef132f790915aa64d91b
 
 ARG IMAGE_NAME
 ARG TAG
