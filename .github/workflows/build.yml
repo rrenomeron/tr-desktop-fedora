@@ -150,13 +150,6 @@ jobs:
       #   run: \
       #     just build ${{ env.IMAGE_NAME }} ${{ env.DEFAULT_TAG }}
 
-      - name: Test Image
-        id: test-image
-        uses: projectbluefin/testsuite/.github/workflows/e2e.yml@main
-        with:
-          image: "${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}"
-          suites: smoke
-
       - name: Rechunk Image
         run: |
           echo "Saving image to rootful storage ..."
@@ -275,3 +268,9 @@ jobs:
       #       --type spdxjson \
       #       --key env://COSIGN_PRIVATE_KEY \
       #       "${IMAGE}@${DIGEST}"
+
+  test:
+    uses: projectbluefin/testsuite/.github/workflows/e2e.yml@main
+    with:
+      image: "ghcr.io/rrenomeron/tr-desktop-fedora:beta-44"
+      suites: smoke
