@@ -3,7 +3,7 @@
 set -eoux pipefail
 
 # Use this for build steps that are unique to this particular image
-
+echo "Removing Fedora Flatpak remote"
 # Removes the Fedora flatpak remote with extreme predjudice
 cat > /usr/lib/systemd/system/flatpak-nuke-fedora.service << SERVICE_UNIT
 [Unit]
@@ -29,8 +29,18 @@ WantedBy=multi-user.target
 SERVICE_UNIT
 
 systemctl enable flatpak-nuke-fedora.service
+echo "Done"
 
+echo "Fixing Gnome 50 overview issue"
 # Temp fix for Dash-To-Dock showing the overview after we tell it not to
 # on GNOME 50 (bug: https://github.com/micheleg/dash-to-dock/issues/2582)
 /tmp/scripts/run_module.sh 'gnome-extensions' \
     '{"type":"gnome-extensions","install":["No overview at start-up"]}'
+
+cat - > /usr/share/glib-2.0/schemas/zz1-12-tr-default-extensions-gnome50-overview-temp-fix.gschema << GSCHEMA
+[org.gnome.shell]
+enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com','dash-to-dock@micxgx.gmail.com','blur-my-shell@aunetx','system-monitor-next@paradoxxx.zero.gmail.com','logomenu@aryan_k','accent-directories@taiwbi.com','no-overview@fthx']
+
+GSCHEMA
+glib-compile-schemas /usr/share/glib-2.0/schemas
+echo "Done"
