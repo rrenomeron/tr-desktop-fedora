@@ -29,3 +29,8 @@ WantedBy=multi-user.target
 SERVICE_UNIT
 
 systemctl enable flatpak-nuke-fedora.service
+
+# Temp fix for Dash-To-Dock showing the overview after we tell it not to
+# on GNOME 50 (bug: https://github.com/micheleg/dash-to-dock/issues/2582)
+/tmp/scripts/run_module.sh 'gnome-extensions' \
+    '{"type":"gnome-extensions","install":["No overview at start-up"]}'
