@@ -87,4 +87,4 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
 ## Verify final image and contents are correct.
 ## NOTE: the --skip var-tmpfiles is due to a weird problem involving an unexpected error
 ##  See https://github.com/rrenomeron/tr-desktop-fedora/actions/runs/25212412017/job/73925606106
-RUN bootc container lint
+RUN bootc container lint 
