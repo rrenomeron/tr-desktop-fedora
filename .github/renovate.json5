@@ -53,13 +53,13 @@
       "matchUpdateTypes": ["major", "minor", "patch", "digest", "pinDigest"],
       "matchPackageNames": ["ghcr.io/hhd-dev/rechunk"],
       "automerge": false
-    },
-    {
-      "description": "Enable GitHub Actions updates since they are now pinned with SHA",
-      "enabled": true,
-      "matchUpdateTypes": ["digest", "pinDigest", "pin", "major", "minor", "patch"],
-      "matchDepTypes": ["action"],
-      "matchFileNames": [".github/workflows/**.yaml", ".github/workflows/**.yml"],
-    },
+    }//,
+    // {
+    //   "description": "Enable GitHub Actions updates since they are now pinned with SHA",
+    //   "enabled": true,
+    //   "matchUpdateTypes": ["digest", "pinDigest", "pin", "major", "minor", "patch"],
+    //   "matchDepTypes": ["action"],
+    //   "matchFileNames": [".github/workflows/**.yaml", ".github/workflows/**.yml"],
+    // },
   ]
 }

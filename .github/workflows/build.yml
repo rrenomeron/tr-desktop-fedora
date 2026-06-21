@@ -10,6 +10,7 @@ on:
     branches:
       - main
       - production
+      - beta-44
     paths-ignore:
       - '**/README.md'
   workflow_dispatch:
@@ -58,7 +59,7 @@ jobs:
           echo "Default tag: $DEFAULT_TAG"
       # These stage versions are pinned by https://github.com/renovatebot/renovate
       - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        uses: actions/checkout@v6
         with:
           submodules: recursive
 
@@ -97,7 +98,7 @@ jobs:
       # Image metadata for https://artifacthub.io/ - This is optional but is highly recommended so we all can get a index of all the custom images
       # The metadata by itself is not going to do anything, you choose if you want your image to be on ArtifactHub or not.
       - name: Image Metadata
-        uses: docker/metadata-action@c1e51972afc2121e065aed6d45c65596fe445f3f # v5
+        uses: docker/metadata-action@v6
         id: metadata
         with:
           # This generates all the tags for your image, you can add custom tags here too!
@@ -129,7 +130,7 @@ jobs:
 
       - name: Build Image
         id: build_image
-        uses: redhat-actions/buildah-build@7a95fa7ee0f02d552a32753e7414641a04307056 # v2
+        uses: redhat-actions/buildah-build@v2
         with:
           containerfiles: |
             ./Containerfile
@@ -189,7 +190,7 @@ jobs:
       #   uses: anchore/sbom-action/download-syft@8e94d75ddd33f69f691467e42275782e4bfefe84 # v0.20.9
       #   with:
       #     syft-version: v1.20.0
-      #
+      
       # - name: Generate SBOM
       #   id: generate-sbom
       #   env:
@@ -205,16 +206,16 @@ jobs:
       # These `if` statements are so that pull requests for your custom images do not make it publish any packages under your name without you knowing
       # They also check if the runner is on the default branch so that things like the merge queue (if you enable it), are going to work
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
-        if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/production')
+        uses: docker/login-action@v4
+        if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/production' || github.ref == 'refs/heads/beta-44')
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push To GHCR
-        uses: redhat-actions/push-to-registry@5ed88d269cf581ea9ef6dd6806d01562096bee9c # v2
-        if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/production')
+        uses: redhat-actions/push-to-registry@v2
+        if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/production' || github.ref == 'refs/heads/beta-44')
         id: push
         env:
           REGISTRY_USER: ${{ github.actor }}
@@ -230,11 +231,11 @@ jobs:
       # Signing is disabled by default. To enable, see README.md "Optional: Enable Image Signing" section.
 
       - name: Install Cosign
-        uses: sigstore/cosign-installer@d7543c93d881b35a8faa02e8e3605f69b7a1ce62 # v3.10.0
-        if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/production')
+        uses: sigstore/cosign-installer@v4.1.2
+        if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/production' || github.ref == 'refs/heads/beta-44')
       
       - name: Sign container image
-        if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/production')
+        if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/production' || github.ref == 'refs/heads/beta-44')
         run: |
           IMAGE_FULL="${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}"
           for tag in ${{ steps.metadata.outputs.tags }}; do
@@ -267,3 +268,10 @@ jobs:
       #       --type spdxjson \
       #       --key env://COSIGN_PRIVATE_KEY \
       #       "${IMAGE}@${DIGEST}"
+
+# TODO: figure out why firefox tests are failing
+  # test:
+  #   uses: projectbluefin/testsuite/.github/workflows/e2e.yml@main
+  #   with:
+  #     image: "ghcr.io/rrenomeron/tr-desktop-fedora:beta-44"
+  #     suites: smoke

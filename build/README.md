@@ -32,7 +32,7 @@ make two separate commits:
 
 ### Best Practices
 
-- **Use descriptive names**: `20-nvidia-drivers.sh` is better than `20-stuff.sh`
+- **Use descriptive names**: `nvidia-drivers.sh` is better than `stuff.sh`
 - **One purpose per script**: Easier to debug and maintain
 - **Clean up after yourself**: Remove temporary files and disable temporary repos
 - **Test incrementally**: Add one script at a time and test builds
