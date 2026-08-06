@@ -46,4 +46,4 @@ glib-compile-schemas /usr/share/glib-2.0/schemas
 echo "Done"
 
 # Install pcsc-tools for smartcard debugging purposes
-dnf install pcsc-tools
+dnf -y install pcsc-tools
