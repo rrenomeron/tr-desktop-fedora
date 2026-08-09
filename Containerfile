@@ -49,7 +49,7 @@ COPY --from=ghcr.io/projectbluefin/common:latest@sha256:69918f88b3cf5a08bf1a3be2
 
 COPY --from=ghcr.io/ublue-os/akmods:coreos-stable-44-x86_64@sha256:b7f567bfc1019646d287a89adab74d67feabc40f365b65299caddec45f1c82d4 / /oci/akmods
 
-COPY --from=ghcr.io/ublue-os/brew:latest@sha256:07799dfe9ed44812a63d1b23c74e3e30b758a976f647032d916c34daf30f60a4 /system_files /oci/brew
+COPY --from=ghcr.io/ublue-os/brew:latest@sha256:8855464e5c150974c5edf4343ffef50ca37b1c4d96a648dce28927033010a372 /system_files /oci/brew
 
 # Copy from submodule.  We put it under /oci for convenience
 COPY tr-osforge/reusable_scripting /oci/tr-osforge
@@ -59,7 +59,7 @@ COPY tr-osforge/reusable_scripting /oci/tr-osforge
 # the ublue main image will produce beta images before the actual release.
 # 
 # The convention for ublue-main is "latest" for current Fedora, and "gts" for Fedora-1
-FROM ghcr.io/ublue-os/silverblue-main:44@sha256:603affceaa048c3f1b3c4cac8c2208e7898406c79b8a7da698586032805512c4
+FROM ghcr.io/ublue-os/silverblue-main:44@sha256:74b9ef4901ef1866b07b499287d1032bdfc7a5d76ac3f86f1c480a061b051cbb
 
 ARG IMAGE_NAME
 ARG TAG

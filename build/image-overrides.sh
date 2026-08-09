@@ -44,3 +44,6 @@ enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com','dash-to-dock@micxg
 GSCHEMA
 glib-compile-schemas /usr/share/glib-2.0/schemas
 echo "Done"
+
+# Install pcsc-tools for smartcard debugging purposes
+dnf -y install pcsc-tools
