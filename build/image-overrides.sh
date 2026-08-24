@@ -47,3 +47,15 @@ echo "Done"
 
 # Install pcsc-tools for smartcard debugging purposes
 dnf -y install pcsc-tools
+
+# There seems to be an issue with swtpm setting its SELinux context correctly.
+# It was fixed in https://bugzilla.redhat.com/show_bug.cgi?id=2511086, and 
+# swtpm-0.10.1-4.fc44.x86_64, but I've observed that the update to 0.10.2
+# broke things, despite the patch in the "good" version making it into the
+# upstream source.
+#
+# This will overwrite the latest version of swtpm with the last known
+# good working version.  Until we figure out how to fix it, remove this
+# from one testing build a week and check to see if we can boot a VM
+# with a software TPM.
+dnf install -y swtpm-0.10.1-4.fc44.x86_64
