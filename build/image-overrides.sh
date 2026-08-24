@@ -58,4 +58,4 @@ dnf -y install pcsc-tools
 # good working version.  Until we figure out how to fix it, remove this
 # from one testing build a week and check to see if we can boot a VM
 # with a software TPM.
-dnf install -y swtpm-0.10.1-4.fc44.x86_64
+dnf install -y swtpm-0.10.1-4.fc44 swtpm-selinux-0.10.1-4.fc44
