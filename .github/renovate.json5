@@ -46,8 +46,8 @@
       "matchManagers": ["dockerfile"],
       "matchUpdateTypes": ["digest"],
       "matchFileNames": ["Containerfile"],
-      "labels": ["renovate", "automerge"],
-      "recreateWhen" : "always"
+      "labels": ["renovate", "automerge"]
+      //"recreateWhen" : "always"
     },
     {
       "description": "Disable automerge for all rechunk updates to allow manual review",
