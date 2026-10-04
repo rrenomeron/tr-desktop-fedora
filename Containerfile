@@ -49,7 +49,7 @@ COPY --from=ghcr.io/projectbluefin/common:latest@sha256:8abfedc6f54612b8db876411
 # This is the kernel from CoreOS
 COPY --from=ghcr.io/ublue-os/akmods:coreos-stable-44-x86_64@sha256:50cc1e0c0f56225a307cb69aba7f495dfb01dbef9fc6f32e85a6c60274305e16 / /oci/akmods
 # This is brew
-COPY --from=ghcr.io/ublue-os/brew:latest@sha256:bc6f5a9fc4f28cded2fe567b31f74825c1f4481d5e43c537c3fcc0d3df6d22ab /system_files /oci/brew
+COPY --from=ghcr.io/ublue-os/brew:latest@sha256:2aaf87e3757466bc28d056505a651c7ca5c56fd28f6ff709b34f3f5dbc860e89 /system_files /oci/brew
 
 # Copy from submodule.  We put it under /oci for convenience
 COPY tr-osforge/reusable_scripting /oci/tr-osforge
