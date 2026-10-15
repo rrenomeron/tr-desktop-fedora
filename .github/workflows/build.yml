@@ -117,7 +117,7 @@ jobs:
 
           echo "Tags for this Action..."
           echo "${alias_tags}"
-          echo "alias_tags=${alias_tags}" >> $GITHUB_OUTPUT
+          echo "alias_tags=${alias_tags}" >> $GITHUB_ENV
 
       - name: Tag Image
         id: tag-images
