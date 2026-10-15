@@ -56,7 +56,7 @@ jobs:
           IMAGE_NAME=$(just image_name)
 
           echo "IMAGE_NAME=${IMAGE_NAME}" >> $GITHUB_ENV
-          
+
       - name: Get Short SHA
         id: get-short-sha
         run: |
@@ -74,6 +74,7 @@ jobs:
           else
             DEFAULT_TAG=${BRANCH//\//-}
           fi
+          echo "DEFAULT_TAG=$DEFAULT_TAG" >> ${GITHUB_ENV}
 
       - name: Prepare environment
         run: |
@@ -120,9 +121,11 @@ jobs:
 
       - name: Tag Image
         id: tag-images
-        env:
-          ALIAS_TAGS: ${{ steps.gen-build-tags.outputs.alias_tags }}
+        # env:
+        #   ALIAS_TAGS: ${{ steps.gen-build-tags.outputs.alias_tags }}
         run: |
+          echo "Tagging ${IMAGE_NAME}:${DEFAULT_TAG}"
+          echo "With alias tags: ${ALIAS_TAGS}"
           just tag-images \
             "${IMAGE_NAME}" \
             "${DEFAULT_TAG}" \
