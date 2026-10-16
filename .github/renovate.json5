@@ -10,11 +10,11 @@
   // Do not rebase when the default branch is updated
   "rebaseWhen": "never",
 
-  customManagers: [
+  regexManagers: [
     {
       customType: 'regex',
       description: 'Match container images in Justfile with tag and digest',
-      managerFilePatterns: [
+      fileMatch: [
         '^Justfile$',
       ],
       matchStrings: [
@@ -25,7 +25,7 @@
     {
       customType: 'regex',
       description: 'Match container images in Justfile run_args without tag or digest',
-      managerFilePatterns: [
+      fileMatch: [
         '^Justfile$',
       ],
       matchStrings: [
