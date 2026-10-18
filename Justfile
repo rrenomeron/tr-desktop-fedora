@@ -51,6 +51,11 @@ clean:
     rm -f output.env
     rm -rf output/
 
+setup-submodule:
+    #!/usr/bin/bash
+    cd tr-osforge
+    git submodule init
+    git submodule update --remote
 # Sudo Clean Repo
 [group('Utility')]
 [private]
