@@ -49,4 +49,4 @@ echo "Done"
 dnf -y install pcsc-tools
 
 # Get updated certificates.  See https://emudhra.we-have-a-problem.com/
-dnf upgrade --enablerepo=updates-testing --refresh --advisory=FEDORA-2026-56e14eb520
+dnf upgrade -y --enablerepo=updates-testing --refresh --advisory=FEDORA-2026-56e14eb520
