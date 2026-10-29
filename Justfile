@@ -181,7 +181,24 @@ ostree-rechunk $target_image=image_name $tag=default_tag:
     RPM_OSTREE_CHUNKER_IMAGE="localhost/${target_image}:${tag}"
 
     GRAPHROOT="$(podman info --format '{{ '{{.Store.GraphRoot}}' }}')"
+    # build-chunked-oci --rootfs synthesizes a new image config from the
+    # filesystem alone, so labels set by `just build` are lost. Capture them
+    # from the freshly built image and re-apply them via --label.
+    # Skip ostree.* and containers.bootc: --bootc generates fresh ones, and any
+    # inherited from the base image would be stale.
+    LABEL_ARGS=()
+    while IFS= read -r label; do
+        LABEL_ARGS+=(--label "${label}")
+    done < <(podman inspect "${target_image}:${tag}" | jq -r '
+        (.[0].Config.Labels // {})
+        | to_entries[]
+        | select(.key | (startswith("ostree.") or . == "containers.bootc") | not)
+        | "\(.key)=\(.value)"')
 
+    if [[ "${#LABEL_ARGS[@]}" -eq 0 ]]; then
+        echo "ERROR: no labels found on ${target_image}:${tag}; refusing to rechunk" >&2
+        exit 1
+    fi
     podman run --rm --pull=never --privileged \
       --mount=type=image,src="${target_image}:${tag}",target=/rpm-ostree \
       --mount=type=bind,src=${GRAPHROOT},target=/run/host-container-storage,rw \
@@ -192,8 +209,14 @@ ostree-rechunk $target_image=image_name $tag=default_tag:
       --max-layers 127 \
       --format-version=2 \
       --bootc \
+      "${LABEL_ARGS[@]}" \
       --rootfs /rpm-ostree \
       --output "containers-storage:[overlay@/run/host-container-storage+/run/rpm-ostree-storage]localhost/${target_image}:${tag}"
+
+    # Fail the build if the metadata didn't survive, rather than shipping an
+    # image without it.
+    podman inspect "${target_image}:${tag}" \
+        | jq -e '.[0].Config.Labels["org.opencontainers.image.title"]' > /dev/null
 
 # Generate Default Tag
 [group('Utility')]
