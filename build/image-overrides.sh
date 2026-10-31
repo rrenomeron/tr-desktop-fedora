@@ -47,6 +47,3 @@ echo "Done"
 
 # Install pcsc-tools for smartcard debugging purposes
 dnf -y install pcsc-tools
-
-# Get updated certificates.  See https://emudhra.we-have-a-problem.com/
-dnf upgrade -y ca-certificates 
