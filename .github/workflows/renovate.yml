@@ -6,7 +6,7 @@ on:
   push:
     branches:
       - main
-      - beta-44
+      - beta-45
     paths:
       - '.github/renovate.json5'
       - '.github/workflows/renovate.yml'
