@@ -47,7 +47,7 @@ COPY system_files /system_files
 # Note: Renovate can automatically update these :latest tags to SHA-256 digests for reproducibility
 COPY --from=ghcr.io/projectbluefin/common:latest@sha256:b15cd6415b1a226b5e6ba48d2b977b60a255cdc6aa45070b4eceacf0c61311a1 /system_files /oci/common
 # This is the kernel from CoreOS
-COPY --from=ghcr.io/ublue-os/akmods:coreos-testing-44-x86_64@sha256:bddd305eb3b558a29f022f29b6a1dae440eaf96c3979400a96560862274e6638 / /oci/akmods
+COPY --from=ghcr.io/ublue-os/akmods:coreos-testing-44-x86_64@sha256:a1f1a37a37eec391701e8c421137492b3f8f955fecc6f17748af360a2ec3fcdb / /oci/akmods
 # This is brew
 COPY --from=ghcr.io/ublue-os/brew:latest@sha256:974ce5e4d6d5fceb6151910957515a42c0eefced4ea386fdfadb0fbad84499a5 /system_files /oci/brew
 
