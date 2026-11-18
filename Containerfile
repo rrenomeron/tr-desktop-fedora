@@ -45,7 +45,7 @@ COPY custom /custom
 COPY system_files /system_files
 # Copy from OCI containers to distinct subdirectories to avoid conflicts
 # Note: Renovate can automatically update these :latest tags to SHA-256 digests for reproducibility
-COPY --from=ghcr.io/projectbluefin/common:latest@sha256:e76e738a12fa72c0530671cdd005406db60a4c4af1cf4749cefde09fd920b766 /system_files /oci/common
+COPY --from=ghcr.io/projectbluefin/common:latest@sha256:48c082eca5f2b8a3b93fba916ff0807996b6da831811eeca2e8a32b743b75cf0 /system_files /oci/common
 # This is the kernel from CoreOS
 COPY --from=ghcr.io/ublue-os/akmods:coreos-testing-44-x86_64@sha256:140dc4a64eead6818c580bf447d97d97d35006313723365c36af8e61e397dbf9 / /oci/akmods
 # This is brew
