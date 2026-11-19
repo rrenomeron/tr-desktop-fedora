@@ -19,6 +19,7 @@ OSFORGE_SCRIPTS_TO_USE=(
     "cockpit"
     "virtualization"
     "docker"
+    "msedit"
 )
 
 if command -v dnf5; then
