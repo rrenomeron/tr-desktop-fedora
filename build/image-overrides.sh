@@ -33,3 +33,7 @@ echo "Done"
 
 # Install pcsc-tools for smartcard debugging purposes
 dnf -y install pcsc-tools
+
+echo "Copying custom system files" 
+# Copy overridden system files
+cp -r system-files/* /
