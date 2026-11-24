@@ -36,4 +36,4 @@ dnf -y install pcsc-tools
 
 echo "Copying custom system files" 
 # Copy overridden system files
-cp -r system_files/* /
+cp -r /ctx/system_files/* /
